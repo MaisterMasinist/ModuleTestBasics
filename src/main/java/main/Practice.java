@@ -289,26 +289,23 @@ public class Practice {
      */
     public static int getWorstMonthIndex(int[][] lossesPerMonths) {
 
-        int worstMonthIndex = Integer.MIN_VALUE;
+        int index = Integer.MIN_VALUE;
         int maxLosses = Integer.MIN_VALUE;
 
-        for (int i = 0; i < lossesPerMonths.length; i++)
-        {
-
+        for (int i = 0; i < lossesPerMonths.length; i++) {
             int sum = 0;
 
-            for (int losses : lossesPerMonths[i])
-            {
+            for (int losses : lossesPerMonths[i]) {
                 sum += losses;
             }
 
             if (sum > maxLosses)
             {
                 maxLosses = sum;
-                worstMonthIndex = i;
+                index = i;
             }
         }
-        return worstMonthIndex;
+        return index;
 
     }
 
@@ -336,6 +333,31 @@ public class Practice {
      * @param shipPowers az űrhajók ereje
      */
     public static void sortShipsByPower(String[] shipNames, int[] shipPowers) {
+
+        for (int i = shipPowers.length-1; i > 0; i--) {
+
+            boolean isSorted = true;
+
+            for (int j = 0; j < i; j++) {
+
+                if (shipPowers[j] < shipPowers[j+1])
+                {
+                    int tempPower = shipPowers[j];
+                    shipPowers[j] = shipPowers[j+1];
+                    shipPowers[j+1] = tempPower;
+
+                    String tempName = shipNames[j];
+                    shipNames[j] = shipNames[j+1];
+                    shipNames[j+1] = tempName;
+
+                    isSorted = false;
+                }
+
+            }
+
+            if(isSorted) break;
+
+        }
 
     }
 
@@ -381,7 +403,16 @@ public class Practice {
      * @return fognak-e harcolni
      */
     public static boolean willTheyFight(int s1, int t1, int s2, int t2) {
-        return false;
+
+        boolean s2IsSmaller = s2 < s1;
+
+        while(s1 != s2 && s2IsSmaller == s1 > s2 && t1 != t2)
+        {
+            s1 += t1;
+            s2 += t2;
+        }
+
+        return s1 == s2;
     }
 
 }
