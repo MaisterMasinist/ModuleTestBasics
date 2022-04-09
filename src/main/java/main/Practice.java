@@ -247,7 +247,16 @@ public class Practice {
      * @return az eredeti üzenet karakterei fordított sorrendben
      */
     public static char[] reverseMessage(char[] message) {
-        return null;
+
+        char[] messageClone = message.clone();
+
+        for (int i = 0; i < messageClone.length / 2; i++) {
+            char temp = messageClone[i];
+            messageClone[i] = messageClone[message.length - 1 - i];
+            messageClone[message.length - 1 - i] = temp;
+        }
+
+        return messageClone;
     }
 
     /**
